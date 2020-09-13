@@ -31,7 +31,7 @@ public class SampleAopApplication implements CommandLineRunner {
 	@Autowired
 	private HelloWorldService helloWorldService;
 
-	@Override
+	
 	public void run(String... args) {
 		System.out.println(this.helloWorldService.getHelloMessage());
 	}

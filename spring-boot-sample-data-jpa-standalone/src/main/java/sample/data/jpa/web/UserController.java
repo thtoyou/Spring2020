@@ -2,6 +2,7 @@ package sample.data.jpa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -49,9 +50,9 @@ public class UserController {
    * GET /get-by-email  --> Return the id for the user having the passed
    * email.
    */
-  @RequestMapping("/get-by-email")
+  @RequestMapping("/get-by-email/{email}")
   @ResponseBody
-  public String getByEmail(String email) {
+  public String getByEmail(@PathVariable("email") String email) {
     String userId = "";
     try {
       User user = userDao.findByEmail(email);
@@ -71,7 +72,7 @@ public class UserController {
   @ResponseBody
   public String updateUser(long id, String email, String name) {
     try {
-      User user = userDao.findOne(id);
+      User user = userDao.findById(id).get();
       user.setEmail(email);
       user.setName(name);
       userDao.save(user);

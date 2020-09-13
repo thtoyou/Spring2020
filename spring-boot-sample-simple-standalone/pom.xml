@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>spring-boot-sample-simple</artifactId>
-		<groupId>org.springframework.boot</groupId>
-		<version>1.4.1.BUILD-SNAPSHOT</version>
+	<groupId>org.springframework.boot</groupId>
+	<version>2.3.3.RELEASE</version>
 	<name>Spring Boot Simple Sample</name>
 	<description>Spring Boot Simple Sample</description>
 	<url>http://projects.spring.io/spring-boot/</url>
@@ -13,17 +15,20 @@
 	</organization>
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
-		<version>1.4.1.BUILD-SNAPSHOT</version>
+			<version>2.3.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-		<version>1.4.1.BUILD-SNAPSHOT</version>
+			<version>2.3.3.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -32,7 +37,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
- 				<version>1.4.1.BUILD-SNAPSHOT</version>
+				<version>1.4.1.BUILD-SNAPSHOT</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -70,7 +75,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -148,5 +154,5 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	
+
 </project>
