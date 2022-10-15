@@ -16,10 +16,10 @@ public class Prof extends User {
     private String name;
     private String poste;
 
-    private Time length;
+    private int length;
     private List<Appointment> appointments = new ArrayList<Appointment>();
 
-    public Prof(String name, String password, String poste, Time length) {
+    public Prof(String name, String password, String poste, int length) {
         this.name = name;
         this.setPassword(password);
         this.poste = poste;
@@ -27,7 +27,7 @@ public class Prof extends User {
     }
 
     public Prof() {
-        this.length = new Time(1);
+        this.length = 1;
     }
 
     public String getPoste() {
@@ -38,11 +38,11 @@ public class Prof extends User {
         this.poste = poste;
     }
 
-    public Time getLength() {
+    public int getLength() {
         return length;
     }
 
-    public void setLength(Time length) {
+    public void setLength(int length) {
         this.length = length;
     }
 

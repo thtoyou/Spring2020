@@ -2,6 +2,7 @@ package sample.data.jpa.DTO;
 
 import sample.data.jpa.domain.Appointment;
 import sample.data.jpa.domain.Prof;
+import sample.data.jpa.domain.User;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class ProfDTO implements DTO {
     private String name;
     private String poste;
 
-    private Time length;
+    private int length;
     private List<Appointment> appointments = new ArrayList<Appointment>();
 
     private long id;
@@ -29,8 +30,13 @@ public class ProfDTO implements DTO {
         this.email =prof.getEmail();
 
     }
+    public ProfDTO(User prof) {
+        this.name = prof.getName();
+        this.id = prof.getId();
+        this.email = prof.getEmail();
 
-    public String getName() {
+    }
+        public String getName() {
         return name;
     }
 
@@ -46,11 +52,11 @@ public class ProfDTO implements DTO {
         this.poste = poste;
     }
 
-    public Time getLength() {
+    public int getLength() {
         return length;
     }
 
-    public void setLength(Time length) {
+    public void setLength(int length) {
         this.length = length;
     }
 

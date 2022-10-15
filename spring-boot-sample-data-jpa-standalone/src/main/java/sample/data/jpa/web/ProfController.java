@@ -1,7 +1,6 @@
 package sample.data.jpa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.DTO.AppointmentDTO;
 import sample.data.jpa.DTO.DTO;
@@ -9,27 +8,31 @@ import sample.data.jpa.DTO.ErrorDTO;
 import sample.data.jpa.DTO.ProfDTO;
 import sample.data.jpa.domain.Appointment;
 import sample.data.jpa.domain.Prof;
+import sample.data.jpa.domain.User;
 import sample.data.jpa.service.ProfDao;
+import sample.data.jpa.service.UserDao;
 
 import javax.validation.Valid;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
-@RequestMapping("/prof")
+@RestController
+
 public class ProfController {
 
 
     @Autowired
+    private UserDao userDao;
     private ProfDao profDao;
 
-    @PostMapping("/create/{name}/{email}/{password}")
+    @PostMapping("prof/create/{name}/{email}/{password}")
     @ResponseBody
     public DTO create(@PathVariable String name, @PathVariable String email, @PathVariable String password) {
         try {
-            Prof prof = (Prof) new Prof().setEmail(email).setPassword(password).setName(name);
-
-            profDao.save(prof);
+            User prof = new Prof(name,password,"",1).setEmail(email);
+        System.out.print(prof);
+            userDao.save(prof);
             return new ProfDTO(prof);
         } catch (Exception ex) {
             return new ErrorDTO(ex);
@@ -39,7 +42,7 @@ public class ProfController {
     /**
      * GET /delete  --> Delete the prof having the passed id.
      */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("prof/{id}")
     @ResponseBody
     public String delete(@PathVariable long id) {
         try {
@@ -55,22 +58,22 @@ public class ProfController {
      * PUT /update  --> Update the email and the name for the prof in the
      * database having the passed id.
      */
-    @PutMapping("/update")
+    @PutMapping("prof/update")
     @ResponseBody
     public DTO updateProf(@Valid @RequestBody ProfDTO profdto) {
         try {
-            profDao.save(profdto.toProf());
+            userDao.save(profdto.toProf());
         } catch (Exception ex) {
             return new ErrorDTO(ex);
         }
         return profdto;
     }
 
-    @RequestMapping("/get-by-email/{email}")
+    @RequestMapping("prof/get-by-email/{email}")
     @ResponseBody
     public DTO getByEmail(@PathVariable("email") String email) {
         try {
-            Prof prof = (Prof) profDao.findByEmail(email);
+            Prof prof = (Prof) userDao.findByEmail(email);
             return new ProfDTO(prof);
         } catch (Exception ex) {
             return new ErrorDTO(ex);
@@ -82,11 +85,11 @@ public class ProfController {
      * GET /get-by-id  --> Return the id for the prof having the passed
      * email.
      */
-    @RequestMapping("/get-by-id/{id}")
+    @RequestMapping("prof/get-by-id/{id}")
     @ResponseBody
     public DTO getById(@PathVariable long id) {
         try {
-            Prof prof = profDao.findById(id);
+            User prof = userDao.findById(id);
             return new ProfDTO(prof);
         } catch (Exception ex) {
             return new ErrorDTO(ex);
@@ -94,7 +97,7 @@ public class ProfController {
 
     }
 
-    @RequestMapping("/get-all-appointments/{id}")
+    @RequestMapping("prof/get-all-appointments/{id}")
 @ResponseBody
     public List<? extends DTO> getappointments(@PathVariable long id){
         try{

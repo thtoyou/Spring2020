@@ -4,12 +4,12 @@ import sample.data.jpa.domain.Appointment;
 import sample.data.jpa.domain.Prof;
 import sample.data.jpa.domain.User;
 
-import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 public class AppointmentDTO implements DTO{
-    private SimpleDateFormat start;
-    private Duration length;
+    private Date start;
+    private int length;
     private Prof prof;
     private User user;
     private Long id;
@@ -26,19 +26,19 @@ public class AppointmentDTO implements DTO{
 
     }
 
-    public SimpleDateFormat getStart() {
+    public Date getStart() {
         return start;
     }
 
-    public void setStart(SimpleDateFormat start) {
+    public void setStart(Date  start) {
         this.start = start;
     }
 
-    public Duration getLength() {
+    public int getLength() {
         return length;
     }
 
-    public void setLength(Duration length) {
+    public void setLength(int length) {
         this.length = length;
     }
 

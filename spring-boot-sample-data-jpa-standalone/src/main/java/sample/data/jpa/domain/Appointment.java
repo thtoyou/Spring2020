@@ -1,10 +1,12 @@
 package sample.data.jpa.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 @Entity
 @NamedQueries({
@@ -12,8 +14,9 @@ import java.time.Duration;
 })
 
 public class Appointment {
-    private SimpleDateFormat start;
-    private Duration length;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date start;
+    private int length;
     private Prof prof;
     private User user;
     private Long id;
@@ -21,7 +24,7 @@ public class Appointment {
     
     
 
-    public Appointment(SimpleDateFormat start, Duration length, Prof prof, User user) {
+    public Appointment(Date start, int length, Prof prof, User user) {
         this.start = start;
         this.length = length;
         this.prof = prof;
@@ -43,20 +46,20 @@ public class Appointment {
         return this;
     }
 
-    public SimpleDateFormat getStart() {
+    public Date getStart() {
         return start;
     }
 
-    public Appointment setStart(SimpleDateFormat start) {
+    public Appointment setStart(Date start) {
         this.start = start;
         return this;
     }
 
-    public Duration getLength() {
+    public int getLength() {
         return length;
     }
 
-    public Appointment setLength(Duration length) {
+    public Appointment setLength(int length) {
         this.length = length;
         return this;
     }

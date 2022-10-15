@@ -1,6 +1,7 @@
 package sample.data.jpa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.DTO.AppointmentDTO;
@@ -11,8 +12,7 @@ import sample.data.jpa.service.AppointmentDao;
 import sample.data.jpa.service.ProfDao;
 import sample.data.jpa.service.UserDao;
 
-import java.text.SimpleDateFormat;
-import java.time.Duration;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/appointment")
@@ -27,19 +27,16 @@ public class AppointmentController {
 date : yyyy-mm-dd
 time : int in seconds
  */
-    @PostMapping("/create/{userid}/{profid}/{date}/{length}")
+    @PostMapping("/create/{userid}/{profid}/{length}")
     @ResponseBody
-    public DTO create(@PathVariable long userid, @PathVariable long profid, @PathVariable SimpleDateFormat date, @PathVariable Duration length) {
+    public DTO create(@PathVariable long userid, @PathVariable long profid, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date  date, @PathVariable int length) {
         try {
-            Appointment app = new Appointment();
-            app.setUser(userDao.findById(userid))
-                    .setProf(profDao.findById(profid))
-                    .setStart(date)
-                    .setLength(length);
-
+            Appointment app = new Appointment(date, length,profDao.findById(profid),userDao.findById(userid));
+            System.out.print(app);
             appointmentDao.save(app);
     return new AppointmentDTO(app);
         } catch (Exception ex) {
+            System.out.print("pas de app");
             return new ErrorDTO(ex);
         }
     }
