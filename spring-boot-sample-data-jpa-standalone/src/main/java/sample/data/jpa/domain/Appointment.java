@@ -24,9 +24,9 @@ public class Appointment {
     
     
 
-    public Appointment(Date start, int length, Prof prof, User user) {
+    public Appointment(Date start, Prof prof, User user) {
         this.start = start;
-        this.length = length;
+        this.length = prof.getLength();
         this.prof = prof;
         this.user = user;
     }
@@ -65,6 +65,7 @@ public class Appointment {
     }
 
     @ManyToOne
+    @JsonBackReference
     public Prof getProf() {
         return prof;
     }
@@ -86,14 +87,10 @@ public class Appointment {
     }
 
 
-    public void Cancel() {
-        this.prof = null;
-        this.user = null;
-    }
 
     @Override
     public String toString() {
-        return "Appointment at " + start + "with" + prof + "and" + user + "for" + length;
+        return "Appointment on the " + start + "with" + prof + "and" + user + "for" + length;
     }
 
 

@@ -1,5 +1,6 @@
 package sample.data.jpa.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.CascadeType;
@@ -45,7 +46,7 @@ public class Prof extends User {
     public void setLength(int length) {
         this.length = length;
     }
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "prof", cascade = CascadeType.ALL)
     public List<Appointment> getAppointments() {
         return appointments;

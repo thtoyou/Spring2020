@@ -96,7 +96,7 @@ public class ProfController {
         }
 
     }
-
+/*
     @RequestMapping("prof/get-all-appointments/{id}")
 @ResponseBody
     public List<? extends DTO> getappointments(@PathVariable long id){
@@ -115,5 +115,5 @@ public class ProfController {
             return errlist;
         }
         return null;
-    }
+    }*/
 }

@@ -23,20 +23,21 @@ public class AppointmentController {
     private UserDao userDao;
     @Autowired
     private ProfDao profDao;
-/*
-date : yyyy-mm-dd
-time : int in seconds
- */
-    @PostMapping("/create/{userid}/{profid}/{length}")
+
+    /*
+    date : yyyy-mm-dd
+    time : int in seconds
+     */
+    @PostMapping("/create/{userid}/{profid}")
     @ResponseBody
-    public DTO create(@PathVariable long userid, @PathVariable long profid, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date  date, @PathVariable int length) {
+    public DTO create(@PathVariable long userid, @PathVariable long profid, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
         try {
-            Appointment app = new Appointment(date, length,profDao.findById(profid),userDao.findById(userid));
-            System.out.print(app);
+            Appointment app = new Appointment(date, profDao.findById(profid), userDao.findById(userid));
+//            System.out.print(app);
             appointmentDao.save(app);
-    return new AppointmentDTO(app);
+            return new AppointmentDTO(app);
         } catch (Exception ex) {
-            System.out.print("pas de app");
+            //         System.out.print("pas de app");
             return new ErrorDTO(ex);
         }
     }
@@ -44,16 +45,16 @@ time : int in seconds
     /**
      * GET /delete  --> Delete the appointment having the passed id.
      */
-    @DeleteMapping()
+    @DeleteMapping("/{id}")
     @ResponseBody
-    public String delete(long id) {
+    public String delete(@PathVariable long id) {
         try {
             Appointment app = appointmentDao.findById(id);
             appointmentDao.delete(app);
         } catch (Exception ex) {
-            return "Error deleting the user:" + ex.toString();
+            return "Error deleting the appointment:" + ex.toString();
         }
-        return "User succesfully deleted!";
+        return "appointment succesfully deleted!";
     }
 
     @RequestMapping("/get-by-id/{id}")
